@@ -1,5 +1,3 @@
-# learn/filters.py
-
 from utils.filters import BaseFilterSet, get_non_image_fields
 from learn.models import Subject, Chapter, Topic, SubTopic
 

@@ -1,5 +1,3 @@
-# learn/serilizers.py
-
 from rest_framework import serializers
 from learn.models import Subject, Chapter, Topic, SubTopic
 
