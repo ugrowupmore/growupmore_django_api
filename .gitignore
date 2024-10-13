@@ -21,6 +21,8 @@ secrets.json
 *.sqlite3
 
 # Ignore virtual environments
+myenv/
+myvenv/
 venv/
 ENV/
 env/
