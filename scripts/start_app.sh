@@ -29,7 +29,7 @@ echo "Activating virtual environment..."
 source "/home/ubuntu/$PROJECT_MAIN_DIR_NAME/venv/bin/activate"
 
 # Make migrations for all apps
-echo "Making migrations for all apps..."
+# echo "Making migrations for all apps..."
 # python manage.py makemigrations admin
 # python manage.py makemigrations auth
 # python manage.py makemigrations contenttypes
@@ -49,7 +49,7 @@ echo "Making migrations for all apps..."
 # python manage.py migrate learn
 
 # Apply the migrations
-echo "Applying migrations..."
+# echo "Applying migrations..."
 # python manage.py migrate
 
 # Run collectstatic command
