@@ -26,3 +26,4 @@ chmod +x scripts/*.sh
 ./scripts/gunicorn.sh
 ./scripts/nginx.sh
 ./scripts/start_app.sh
+./scripts/after_install.sh
