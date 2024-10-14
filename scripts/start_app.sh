@@ -12,11 +12,11 @@ if [ -z "$PROJECT_MAIN_DIR_NAME" ]; then
 fi
 
 # Create the .env file at the root if not already created
-echo "Creating .env file at the root for Supabase database connection..."
-cat <<EOT > "/home/ubuntu/$PROJECT_MAIN_DIR_NAME/.env"
-# Database connection string
-DATABASE_URL=postgresql://postgres.pfdgzhiuibsnpbznasxl:WM08IriQxsIG2jfh@aws-0-ap-south-1.pooler.supabase.com:6543/growupmore_db
-EOT
+# echo "Creating .env file at the root for Supabase database connection..."
+# cat <<EOT > "/home/ubuntu/$PROJECT_MAIN_DIR_NAME/.env"
+# # Database connection string
+# DATABASE_URL=postgresql://postgres.pfdgzhiuibsnpbznasxl:WM08IriQxsIG2jfh@aws-0-ap-south-1.pooler.supabase.com:6543/growupmore_db
+# EOT
 
 # Change ownership to ubuntu user
 sudo chown -R ubuntu:ubuntu "/home/ubuntu/$PROJECT_MAIN_DIR_NAME"
