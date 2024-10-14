@@ -30,7 +30,23 @@ source "/home/ubuntu/$PROJECT_MAIN_DIR_NAME/venv/bin/activate"
 
 # Make migrations for all apps
 echo "Making migrations for all apps..."
-python manage.py makemigrations
+python manage.py makemigrations admin
+python manage.py makemigrations auth
+python manage.py makemigrations contenttypes
+python manage.py makemigrations sessions
+
+python manage.py migrate admin
+python manage.py migrate auth
+python manage.py migrate contenttypes
+python manage.py migrate sessions
+
+python manage.py makemigrations master
+python manage.py makemigrations hr
+python manage.py makemigrations learn
+
+python manage.py migrate master
+python manage.py migrate hr
+python manage.py migrate learn
 
 # Apply the migrations
 echo "Applying migrations..."
