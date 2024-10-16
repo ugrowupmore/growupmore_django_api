@@ -13,7 +13,7 @@ class Country(SoftDeleteModel):
     name = models.TextField(default='NA')
     numeric_code = models.TextField(default='NA')
     iso2 = models.TextField(default='NA')
-    iso3 = models.TextField(default='NA')
+    iso3 = models.TextField(default='NA', unique=True, )
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     phone_code = models.TextField(default='NA')
     capital = models.IntegerField(default=0)
@@ -43,11 +43,7 @@ class Country(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug if not already set
-        if not self.slug and self.iso3:
-            self.slug = self.iso3.lower()
-        
+    def save(self, *args, **kwargs):       
         super(Country, self).save(*args, **kwargs)
 
         # Check if is_active has changed
@@ -87,12 +83,7 @@ class State(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug with a combination of country ISO3 and state name if not already set
-        if not self.slug and self.name and self.country:
-            country_iso3 = self.country.iso3 if self.country else 'NA'
-            self.slug = slugify(f"{country_iso3}-{self.name}".lower().replace(' ', '_'))
-
+    def save(self, *args, **kwargs):       
         super(State, self).save(*args, **kwargs)
 
         # Ensure country is_active is True if state is_active is set to True
@@ -146,12 +137,7 @@ class City(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug using a combination of state name and city name if not already set
-        if not self.slug and self.name and self.state:
-            state_name = self.state.name if self.state else 'NA'
-            self.slug = slugify(f"{state_name}-{self.name}".lower().replace(' ', '_'))
-
+    def save(self, *args, **kwargs):       
         super(City, self).save(*args, **kwargs)
 
         # Ensure state and country are_active is True if city is_active is set to True
@@ -205,12 +191,7 @@ class Bank(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug using a combination of country ISO3 and bank name
-        if not self.slug and self.name and self.country:
-            country_iso3 = self.country.iso3 if self.country else 'NA'
-            self.slug = slugify(f"{country_iso3}-{self.name}".lower().replace(' ', '_'))
-        
+    def save(self, *args, **kwargs):      
         super(Bank, self).save(*args, **kwargs)
 
 
@@ -234,9 +215,7 @@ class Department(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.name:
-            self.slug = slugify(self.name.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(Department, self).save(*args, **kwargs)
 
         # Check if is_active has changed
@@ -270,9 +249,7 @@ class Designation(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.title:
-            self.slug = slugify(self.title.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):     
         super(Designation, self).save(*args, **kwargs)
 
         # Check if is_active has changed
@@ -303,9 +280,7 @@ class SocialStatus(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.name:
-            self.slug = slugify(self.name.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(SocialStatus, self).save(*args, **kwargs)
 
 
@@ -330,12 +305,7 @@ class DocumentType(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug if not already set
-        if not self.slug and self.type:
-            self.slug = slugify(self.type.lower().replace(' ', '_'))
-
-        # First, save the DocumentType instance
+    def save(self, *args, **kwargs):      
         super(DocumentType, self).save(*args, **kwargs)
 
         # Now, perform the related document updates
@@ -368,12 +338,7 @@ class Document(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug with a combination of document type and document name if not already set
-        if not self.slug and self.name and self.document_type:
-            document_type = self.document_type.type if self.document_type else 'NA'
-            self.slug = slugify(f"{document_type}-{self.name}".lower().replace(' ', '_'))
-
+    def save(self, *args, **kwargs):        
         super(Document, self).save(*args, **kwargs)
 
         # Ensure document_type is_active is True if document is_active is set to True
@@ -401,7 +366,7 @@ class Document(SoftDeleteModel):
 # BranchType model
 class BranchType(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    type = models.TextField(default='NA')
+    type = models.TextField(default='NA', unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     image = models.ImageField(upload_to='branchtypes_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     description = models.TextField(default='NA')
@@ -419,9 +384,7 @@ class BranchType(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.type:
-            self.slug = slugify(self.type.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(BranchType, self).save(*args, **kwargs)
 
 
@@ -445,9 +408,7 @@ class Package(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.name:
-            self.slug = slugify(self.name.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):     
         super(Package, self).save(*args, **kwargs)
 
 
@@ -471,9 +432,7 @@ class Content(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.content:
-            self.slug = slugify(self.content.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(Content, self).save(*args, **kwargs)
 
 
@@ -506,7 +465,7 @@ class PackageContent(SoftDeleteModel):
 # ServiceCategories model
 class ServiceCategory(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    category = models.TextField(default='NA')
+    category = models.TextField(default='NA', unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField(default='NA')
 
@@ -523,9 +482,7 @@ class ServiceCategory(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.category:
-            self.slug = slugify(self.category.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(ServiceCategory, self).save(*args, **kwargs)
 
 
@@ -549,9 +506,7 @@ class CourseCategory(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.category:
-            self.slug = slugify(self.category.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):      
         super(CourseCategory, self).save(*args, **kwargs)
 
         # Check if is_active has changed
@@ -584,9 +539,7 @@ class CourseSubCategory(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        if not self.slug and self.sub_category and self.category:
-            self.slug = slugify(f"{self.category.category}-{self.sub_category}".lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):        
         super(CourseSubCategory, self).save(*args, **kwargs)
 
 
@@ -611,6 +564,4 @@ class FAQCategory(SoftDeleteModel):
         ]
 
     def save(self, *args, **kwargs):
-        if not self.slug and self.category:
-            self.slug = slugify(self.category.lower().replace(' ', '_'))
         super(FAQCategory, self).save(*args, **kwargs)

@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from learn.models import Subject, Chapter, Topic, SubTopic
+from utils.serializers import SlugValidationMixin
 
-class SubjectSerializer(serializers.ModelSerializer):
+class SubjectSerializer(SlugValidationMixin, serializers.ModelSerializer):
+    slug_source_field = ['name']
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
@@ -11,7 +13,8 @@ class SubjectSerializer(serializers.ModelSerializer):
         model = Subject
         fields = '__all__'
 
-class ChapterSerializer(serializers.ModelSerializer):
+class ChapterSerializer(SlugValidationMixin, serializers.ModelSerializer):
+    slug_source_field = ['subject', 'name']
     subject_name = serializers.CharField(source='subject.name', read_only=True)
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
@@ -22,7 +25,8 @@ class ChapterSerializer(serializers.ModelSerializer):
         model = Chapter
         fields = '__all__'
 
-class TopicSerializer(serializers.ModelSerializer):
+class TopicSerializer(SlugValidationMixin, serializers.ModelSerializer):
+    slug_source_field = ['subject', 'chapter', 'title']
     subject_name = serializers.CharField(source='subject.name', read_only=True)
     chapter_name = serializers.CharField(source='chapter.name', read_only=True)
     slug = serializers.CharField(read_only=True)
@@ -34,7 +38,8 @@ class TopicSerializer(serializers.ModelSerializer):
         model = Topic
         fields = '__all__'
 
-class SubTopicSerializer(serializers.ModelSerializer):
+class SubTopicSerializer(SlugValidationMixin, serializers.ModelSerializer):
+    slug_source_field = ['subject', 'chapter', 'topic', 'title']
     subject_name = serializers.CharField(source='subject.name', read_only=True)
     chapter_name = serializers.CharField(source='chapter.name', read_only=True)
     topic_title = serializers.CharField(source='topic.title', read_only=True)

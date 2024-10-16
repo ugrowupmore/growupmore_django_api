@@ -2,8 +2,9 @@
 
 from rest_framework import serializers
 from hr.models import Employee
+from utils.serializers import SlugValidationMixin
 
-class EmployeeSerializer(serializers.ModelSerializer):
+class EmployeeSerializer(SlugValidationMixin, serializers.ModelSerializer):
     country_name = serializers.CharField(source='country.name', read_only=True)
     state_name = serializers.CharField(source='state.name', read_only=True)
     city_name = serializers.CharField(source='city.name', read_only=True)

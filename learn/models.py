@@ -7,7 +7,7 @@ from utils.soft_delete import SoftDeleteModel
 # Subject model
 class Subject(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='NA')
+    name = models.TextField(default='NA', unique=True)
     subject_code = models.TextField(default='NA')
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     image = models.ImageField(upload_to='subjects_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
@@ -38,10 +38,7 @@ class Subject(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug if not already set
-        if not self.slug and self.name:
-            self.slug = slugify(self.name.lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):      
         super(Subject, self).save(*args, **kwargs)
 
         # Update related objects' is_active and is_deleted status
@@ -89,10 +86,7 @@ class Chapter(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug using subject code and chapter name
-        if not self.slug and self.name and self.subject:
-            self.slug = slugify(f"{self.subject.subject_code}-{self.name}".lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(Chapter, self).save(*args, **kwargs)
 
         # Ensure parent subject is active and not deleted
@@ -147,10 +141,7 @@ class Topic(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug using subject code, chapter name, and topic title
-        if not self.slug and self.title and self.chapter and self.subject:
-            self.slug = slugify(f"{self.subject.subject_code}-{self.chapter.name}-{self.title}".lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):        
         super(Topic, self).save(*args, **kwargs)
 
         # Ensure parent chapter and subject are active and not deleted
@@ -212,10 +203,7 @@ class SubTopic(SoftDeleteModel):
             models.Index(fields=['status', 'is_deleted']),
         ]
 
-    def save(self, *args, **kwargs):
-        # Generate slug using subject code, chapter name, topic title, and subtopic title
-        if not self.slug and self.title and self.topic and self.chapter and self.subject:
-            self.slug = slugify(f"{self.subject.subject_code}-{self.chapter.name}-{self.topic.title}-{self.title}".lower().replace(' ', '_'))
+    def save(self, *args, **kwargs):       
         super(SubTopic, self).save(*args, **kwargs)
 
         # Ensure parent topic, chapter, and subject are active and not deleted
