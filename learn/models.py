@@ -5,7 +5,7 @@ from utils.soft_delete import SoftDeleteModel
 # Subject model
 class Subject(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='NA', unique=True)
+    name = models.TextField(default='NA')
     subject_code = models.TextField(default='NA')    
     image = models.ImageField(upload_to='subjects_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     yt_thumbnail_image = models.ImageField(upload_to='subjects_yt_thumbnails/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])

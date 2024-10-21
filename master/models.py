@@ -12,7 +12,7 @@ class Country(SoftDeleteModel):
     name = models.TextField(default='NA')
     numeric_code = models.TextField(default='NA')
     iso2 = models.TextField(default='NA')
-    iso3 = models.TextField(default='NA', unique=True, )    
+    iso3 = models.TextField(default='NA')    
     phone_code = models.TextField(default='NA')
     capital = models.IntegerField(default=0)
     currency = models.TextField(default='NA')
@@ -383,7 +383,7 @@ class Document(SoftDeleteModel):
 # BranchType model
 class BranchType(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    type = models.TextField(default='NA', unique=True)    
+    type = models.TextField(default='NA')    
     image = models.ImageField(upload_to='branchtypes_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     description = models.TextField(default='NA')
     
@@ -488,7 +488,7 @@ class PackageContent(SoftDeleteModel):
 # ServiceCategories model
 class ServiceCategory(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    category = models.TextField(default='NA', unique=True)    
+    category = models.TextField(default='NA')    
     description = models.TextField(default='NA')
 
     class Meta:
