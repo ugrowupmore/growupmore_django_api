@@ -3,8 +3,7 @@
 from rest_framework import serializers
 from master.models import Content, Country, CourseCategory, CourseSubCategory, FAQCategory, Package, PackageContent, ServiceCategory, State, City, Bank, Department, Designation, SocialStatus, DocumentType, Document, BranchType
 
-class CountrySerializer(serializers.ModelSerializer):        
-    slug = serializers.CharField(read_only=True)
+class CountrySerializer(serializers.ModelSerializer):            
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -15,8 +14,7 @@ class CountrySerializer(serializers.ModelSerializer):
 
 
 class StateSerializer(serializers.ModelSerializer):    
-    country_name = serializers.CharField(source='country.name', read_only=True)
-    slug = serializers.CharField(read_only=True)
+    country_name = serializers.CharField(source='country.name', read_only=True)    
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -28,8 +26,7 @@ class StateSerializer(serializers.ModelSerializer):
 
 class CitySerializer(serializers.ModelSerializer):    
     country_name = serializers.CharField(source='country.name', read_only=True)
-    state_name = serializers.CharField(source='state.name', read_only=True)
-    slug = serializers.CharField(read_only=True)
+    state_name = serializers.CharField(source='state.name', read_only=True)    
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -40,8 +37,7 @@ class CitySerializer(serializers.ModelSerializer):
 
 
 class BankSerializer(serializers.ModelSerializer):    
-    country_name = serializers.CharField(source='country.name', read_only=True)
-    slug = serializers.CharField(read_only=True)
+    country_name = serializers.CharField(source='country.name', read_only=True)    
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -51,8 +47,7 @@ class BankSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DepartmentSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class DepartmentSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -62,8 +57,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DesignationSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class DesignationSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -73,8 +67,7 @@ class DesignationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SocialStatusSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class SocialStatusSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -84,8 +77,7 @@ class SocialStatusSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DocumentTypeSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class DocumentTypeSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -96,8 +88,7 @@ class DocumentTypeSerializer(serializers.ModelSerializer):
 
 
 class DocumentSerializer(serializers.ModelSerializer):    
-    document_type_name = serializers.CharField(source='document_type.type', read_only=True)
-    slug = serializers.CharField(read_only=True)
+    document_type_name = serializers.CharField(source='document_type.type', read_only=True)    
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -107,8 +98,7 @@ class DocumentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class BranchTypeSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class BranchTypeSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -118,8 +108,7 @@ class BranchTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PackageSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class PackageSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -129,8 +118,7 @@ class PackageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ContentSerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class ContentSerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -152,8 +140,7 @@ class PackageContentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ServiceCategorySerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class ServiceCategorySerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -163,8 +150,7 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CourseCategorySerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class CourseCategorySerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -175,8 +161,7 @@ class CourseCategorySerializer(serializers.ModelSerializer):
 
 
 class CourseSubCategorySerializer(serializers.ModelSerializer):
-    category_name = serializers.CharField(source='category.category', read_only=True)
-    slug = serializers.CharField(read_only=True)
+    category_name = serializers.CharField(source='category.category', read_only=True)    
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
@@ -186,8 +171,7 @@ class CourseSubCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FAQCategorySerializer(serializers.ModelSerializer):    
-    slug = serializers.CharField(read_only=True)
+class FAQCategorySerializer(serializers.ModelSerializer):        
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
     updated_by = serializers.CharField(read_only=True)
