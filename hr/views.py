@@ -12,4 +12,5 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     filterset_class = EmployeeFilter
     search_fields = ['first_name', 'last_name', 'department__name', 'designation__title', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'first_name', 'last_name', 'department__name', 'designation__title', 'status', 'is_active', 'is_deleted']
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination

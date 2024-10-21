@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from learn.models import Subject, Chapter, Topic, SubTopic
-from utils.serializers import SlugValidationMixin
 
-class SubjectSerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['name']
+class SubjectSerializer(serializers.ModelSerializer):    
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
     last_update_date = serializers.DateTimeField(read_only=True)
@@ -13,8 +11,7 @@ class SubjectSerializer(SlugValidationMixin, serializers.ModelSerializer):
         model = Subject
         fields = '__all__'
 
-class ChapterSerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['subject__name', 'name']
+class ChapterSerializer(serializers.ModelSerializer):    
     subject_name = serializers.CharField(source='subject.name', read_only=True)
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
@@ -25,8 +22,7 @@ class ChapterSerializer(SlugValidationMixin, serializers.ModelSerializer):
         model = Chapter
         fields = '__all__'
 
-class TopicSerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['subject__name', 'chapter__name', 'title']
+class TopicSerializer(serializers.ModelSerializer):    
     subject_name = serializers.CharField(source='subject.name', read_only=True)
     chapter_name = serializers.CharField(source='chapter.name', read_only=True)
     slug = serializers.CharField(read_only=True)
@@ -38,8 +34,7 @@ class TopicSerializer(SlugValidationMixin, serializers.ModelSerializer):
         model = Topic
         fields = '__all__'
 
-class SubTopicSerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['subject__name', 'chapter__name', 'topic__title', 'title']
+class SubTopicSerializer(serializers.ModelSerializer):    
     subject_name = serializers.CharField(source='subject.name', read_only=True)
     chapter_name = serializers.CharField(source='chapter.name', read_only=True)
     topic_title = serializers.CharField(source='topic.title', read_only=True)

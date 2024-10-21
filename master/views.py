@@ -17,7 +17,7 @@ class CountryViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'iso2', 'iso3', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'iso2', 'iso3', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -29,7 +29,7 @@ class StateViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'country__name', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'country__name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -40,7 +40,7 @@ class CityViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'state__name', 'country__name', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'state__name', 'country__name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -51,7 +51,7 @@ class BankViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'country__name', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'country__name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -62,7 +62,7 @@ class DepartmentViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -73,7 +73,7 @@ class DesignationViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['title', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'title', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -84,7 +84,7 @@ class SocialStatusViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -96,7 +96,7 @@ class DocumentTypeViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['type', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'type', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -108,7 +108,7 @@ class DocumentViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['name', 'document_type__type', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'name', 'document_type__type', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -119,7 +119,7 @@ class BranchTypeViewSet(SoftDeleteViewSet):
     filterset_fields = '__all__'
     search_fields = ['type', 'status', 'is_active', 'is_deleted']  # Updated for indexed fields
     ordering_fields = ['id', 'type', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -130,7 +130,7 @@ class PackageViewSet(SoftDeleteViewSet):
     filterset_class = PackageFilter
     search_fields = ['name', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -141,7 +141,7 @@ class ContentViewSet(SoftDeleteViewSet):
     filterset_class = ContentFilter
     search_fields = ['content', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'content', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -152,6 +152,7 @@ class PackageContentViewSet(SoftDeleteViewSet):
     filterset_class = PackageContentFilter
     search_fields = ['package__name', 'content__content', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'package__name', 'content__content', 'status', 'is_active', 'is_deleted']
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -162,7 +163,7 @@ class ServiceCategoryViewSet(SoftDeleteViewSet):
     filterset_class = ServiceCategoryFilter
     search_fields = ['category', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'category', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -173,7 +174,7 @@ class CourseCategoryViewSet(SoftDeleteViewSet):
     filterset_class = CourseCategoryFilter
     search_fields = ['category', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'category', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -184,7 +185,7 @@ class CourseSubCategoryViewSet(SoftDeleteViewSet):
     filterset_class = CourseSubCategoryFilter
     search_fields = ['category__category', 'sub_category', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'category__category', 'sub_category', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 
@@ -195,5 +196,5 @@ class FAQCategoryViewSet(SoftDeleteViewSet):
     filterset_class = FAQCategoryFilter
     search_fields = ['category', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'category', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination

@@ -13,8 +13,7 @@ class Country(SoftDeleteModel):
     name = models.TextField(default='NA')
     numeric_code = models.TextField(default='NA')
     iso2 = models.TextField(default='NA')
-    iso3 = models.TextField(default='NA', unique=True, )
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    iso3 = models.TextField(default='NA', unique=True, )    
     phone_code = models.TextField(default='NA')
     capital = models.IntegerField(default=0)
     currency = models.TextField(default='NA')
@@ -66,8 +65,7 @@ class State(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.SET_NULL, related_name='states')
     name = models.TextField(default='NA')
-    capital = models.IntegerField(default=0)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    capital = models.IntegerField(default=0)    
     flag_image = models.ImageField(upload_to='states_flags/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     founded_date = models.DateField(null=True, blank=True)
     website = models.TextField(default='NA')   
@@ -118,8 +116,7 @@ class City(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.SET_NULL, related_name='cities')
     state = models.ForeignKey(State, null=True, blank=True, on_delete=models.SET_NULL, related_name='cities')
-    name = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    name = models.TextField(default='NA')    
     latitude = models.DecimalField(max_digits=11, decimal_places=8, default=0)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, default=0)
     location_url = models.TextField(default='NA')
@@ -179,8 +176,7 @@ class City(SoftDeleteModel):
 # Bank model
 class Bank(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    name = models.TextField(default='NA')    
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.SET_NULL, related_name='banks')
     swift_code = models.TextField(default='NA')
     iban_code = models.TextField(default='NA')
@@ -210,8 +206,7 @@ class Bank(SoftDeleteModel):
 # Department model
 class Department(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    name = models.TextField(default='NA')    
     description = models.TextField(default='NA')
    
     class Meta:
@@ -244,8 +239,7 @@ class Department(SoftDeleteModel):
 # Designation model
 class Designation(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    title = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    title = models.TextField(default='NA')    
     level = models.CharField(max_length=10, choices=DesignationLevel.choices, default=DesignationLevel.OTHER)
     description = models.TextField(default='NA')
     travel_required = models.BooleanField(default=False)
@@ -281,8 +275,7 @@ class Designation(SoftDeleteModel):
 # SocialStatus model
 class SocialStatus(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    name = models.TextField(default='NA')    
     description = models.TextField(default='NA')   
 
     class Meta:
@@ -308,8 +301,7 @@ class SocialStatus(SoftDeleteModel):
 # DocumentType model
 class DocumentType(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    type = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    type = models.TextField(default='NA')    
     image = models.ImageField(upload_to='doctypes_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     description = models.TextField(default='NA')
     
@@ -344,8 +336,7 @@ class DocumentType(SoftDeleteModel):
 class Document(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
     document_type = models.ForeignKey(DocumentType, null=True, blank=True, on_delete=models.SET_NULL, related_name='documents')
-    name = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    name = models.TextField(default='NA')    
     image = models.ImageField(upload_to='doc_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     description = models.TextField(default='NA')
     
@@ -393,8 +384,7 @@ class Document(SoftDeleteModel):
 # BranchType model
 class BranchType(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    type = models.TextField(default='NA', unique=True)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    type = models.TextField(default='NA', unique=True)    
     image = models.ImageField(upload_to='branchtypes_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     description = models.TextField(default='NA')
     
@@ -421,8 +411,7 @@ class BranchType(SoftDeleteModel):
 # Packages model
 class Package(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    name = models.TextField(default='NA')    
     description = models.TextField(default='NA')
 
     class Meta:
@@ -448,8 +437,7 @@ class Package(SoftDeleteModel):
 # Contents model
 class Content(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    content = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    content = models.TextField(default='NA')    
     description = models.TextField(default='NA')
 
     class Meta:
@@ -501,8 +489,7 @@ class PackageContent(SoftDeleteModel):
 # ServiceCategories model
 class ServiceCategory(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    category = models.TextField(default='NA', unique=True)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    category = models.TextField(default='NA', unique=True)    
     description = models.TextField(default='NA')
 
     class Meta:
@@ -528,8 +515,7 @@ class ServiceCategory(SoftDeleteModel):
 # CourseCategories model
 class CourseCategory(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    category = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    category = models.TextField(default='NA')    
     description = models.TextField(default='NA')
 
     class Meta:
@@ -563,8 +549,7 @@ class CourseCategory(SoftDeleteModel):
 class CourseSubCategory(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
     category = models.ForeignKey(CourseCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='sub_categories')
-    sub_category = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    sub_category = models.TextField(default='NA')    
     description = models.TextField(default='NA')
 
     class Meta:
@@ -591,8 +576,7 @@ class CourseSubCategory(SoftDeleteModel):
 # FAQCategories model
 class FAQCategory(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
-    category = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    category = models.TextField(default='NA')    
     description = models.TextField(default='NA')
 
     class Meta:

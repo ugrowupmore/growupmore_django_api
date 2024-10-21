@@ -13,7 +13,7 @@ class SubjectViewSet(SoftDeleteViewSet):
     filterset_class = SubjectFilter  
     search_fields = ['name', 'subject_code', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'name', 'subject_code', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 class ChapterViewSet(SoftDeleteViewSet):
@@ -23,7 +23,7 @@ class ChapterViewSet(SoftDeleteViewSet):
     filterset_class = ChapterFilter
     search_fields = ['name', 'subject__name', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'name', 'subject__name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 class TopicViewSet(SoftDeleteViewSet):
@@ -33,7 +33,7 @@ class TopicViewSet(SoftDeleteViewSet):
     filterset_class = TopicFilter
     search_fields = ['title', 'chapter__name', 'subject__name', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'title', 'chapter__name', 'subject__name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
 
 class SubTopicViewSet(SoftDeleteViewSet):
@@ -43,5 +43,5 @@ class SubTopicViewSet(SoftDeleteViewSet):
     filterset_class = SubTopicFilter
     search_fields = ['title', 'topic__title', 'chapter__name', 'subject__name', 'status', 'is_active', 'is_deleted']
     ordering_fields = ['id', 'title', 'topic__title', 'chapter__name', 'subject__name', 'status', 'is_active', 'is_deleted']
-    lookup_field = 'slug'
+    lookup_field = 'id'
     pagination_class = StandardResultsSetPagination
