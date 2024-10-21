@@ -1,7 +1,6 @@
 # master/models.py
 
 from django.db import models
-from django.utils.text import slugify
 from hr.models import Employee
 from utils.enums import DesignationLevel
 from utils.image_size import validate_image_size_2mb

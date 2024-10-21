@@ -1,6 +1,4 @@
 from django.db import models
-from django.utils.text import slugify
-from utils.enums import StatusType
 from utils.image_size import validate_image_size_2mb
 from utils.soft_delete import SoftDeleteModel
 
@@ -8,8 +6,7 @@ from utils.soft_delete import SoftDeleteModel
 class Subject(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
     name = models.TextField(default='NA', unique=True)
-    subject_code = models.TextField(default='NA')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    subject_code = models.TextField(default='NA')    
     image = models.ImageField(upload_to='subjects_images/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     yt_thumbnail_image = models.ImageField(upload_to='subjects_yt_thumbnails/', max_length=200, null=True, blank=True, validators=[validate_image_size_2mb])
     alt_text = models.TextField(default='NA')
@@ -27,8 +24,7 @@ class Subject(SoftDeleteModel):
         db_table = '"learn"."subjects"'
         indexes = [
             models.Index(fields=['name']),
-            models.Index(fields=['subject_code']),
-            models.Index(fields=['slug']),
+            models.Index(fields=['subject_code']),            
             models.Index(fields=['status']),
             models.Index(fields=['is_active']),
             models.Index(fields=['is_deleted']),
@@ -76,8 +72,7 @@ class Chapter(SoftDeleteModel):
     class Meta:
         db_table = '"learn"."chapters"'
         indexes = [
-            models.Index(fields=['name']),
-            models.Index(fields=['slug']),
+            models.Index(fields=['name']),            
             models.Index(fields=['subject']),
             models.Index(fields=['status']),
             models.Index(fields=['is_active']),
@@ -132,8 +127,7 @@ class Topic(SoftDeleteModel):
     class Meta:
         db_table = '"learn"."topics"'
         indexes = [
-            models.Index(fields=['title']),
-            models.Index(fields=['slug']),
+            models.Index(fields=['title']),            
             models.Index(fields=['subject']),
             models.Index(fields=['chapter']),
             models.Index(fields=['status']),
@@ -195,8 +189,7 @@ class SubTopic(SoftDeleteModel):
     class Meta:
         db_table = '"learn"."sub_topics"'
         indexes = [
-            models.Index(fields=['title']),
-            models.Index(fields=['slug']),
+            models.Index(fields=['title']),            
             models.Index(fields=['subject']),
             models.Index(fields=['chapter']),
             models.Index(fields=['topic']),
