@@ -30,7 +30,7 @@ class StateSerializer(SlugValidationMixin, serializers.ModelSerializer):
 
 
 class CitySerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['country', 'state', 'name']
+    slug_source_field = ['country__iso3', 'state__name', 'name']
     country_name = serializers.CharField(source='country.name', read_only=True)
     state_name = serializers.CharField(source='state.name', read_only=True)
     slug = serializers.CharField(read_only=True)
@@ -44,7 +44,7 @@ class CitySerializer(SlugValidationMixin, serializers.ModelSerializer):
 
 
 class BankSerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['country', 'name']
+    slug_source_field = ['country__iso3', 'name']
     country_name = serializers.CharField(source='country.name', read_only=True)
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
@@ -105,7 +105,7 @@ class DocumentTypeSerializer(SlugValidationMixin, serializers.ModelSerializer):
 
 
 class DocumentSerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['document_type', 'name']
+    slug_source_field = ['document_type__tyoe', 'name']
     document_type_name = serializers.CharField(source='document_type.type', read_only=True)
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
@@ -190,7 +190,7 @@ class CourseCategorySerializer(SlugValidationMixin, serializers.ModelSerializer)
 
 
 class CourseSubCategorySerializer(SlugValidationMixin, serializers.ModelSerializer):
-    slug_source_field = ['category', 'sub_category']
+    slug_source_field = ['category__category', 'sub_category']
     category_name = serializers.CharField(source='category.category', read_only=True)
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)

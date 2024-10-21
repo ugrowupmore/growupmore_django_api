@@ -52,6 +52,9 @@ class Subject(SoftDeleteModel):
             Topic.objects.filter(subject=self).update(is_deleted=True)
             SubTopic.objects.filter(subject=self).update(is_deleted=True)
 
+    def __str__(self):
+        return self.name
+
 # Chapter model
 class Chapter(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
@@ -106,6 +109,9 @@ class Chapter(SoftDeleteModel):
         if self.is_deleted:
             Topic.objects.filter(chapter=self).update(is_deleted=True)
             SubTopic.objects.filter(chapter=self).update(is_deleted=True)
+
+    def __str__(self):
+        return self.name
 
 # Topic model
 class Topic(SoftDeleteModel):
@@ -168,6 +174,9 @@ class Topic(SoftDeleteModel):
         if self.is_deleted:
             SubTopic.objects.filter(topic=self).update(is_deleted=True)
 
+    def __str__(self):
+        return self.title
+
 # SubTopic model
 class SubTopic(SoftDeleteModel):
     id = models.AutoField(primary_key=True)
@@ -228,3 +237,6 @@ class SubTopic(SoftDeleteModel):
             if self.subject and self.subject.is_deleted:
                 self.subject.is_deleted = False
                 self.subject.save()
+
+    def __str__(self):
+        return self.title

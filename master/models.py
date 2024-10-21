@@ -59,7 +59,7 @@ class Country(SoftDeleteModel):
             Employee.objects.filter(country=self).update(is_deleted=False)      
 
     def __str__(self):
-        return self.iso3
+        return self.name
 
 # State model
 class State(SoftDeleteModel):
@@ -172,6 +172,9 @@ class City(SoftDeleteModel):
         if not self.is_deleted:            
             Employee.objects.filter(city=self).update(is_deleted=False)
 
+    def __str__(self):
+        return self.name
+
 
 # Bank model
 class Bank(SoftDeleteModel):
@@ -198,6 +201,10 @@ class Bank(SoftDeleteModel):
 
     def save(self, *args, **kwargs):      
         super(Bank, self).save(*args, **kwargs)
+
+    
+    def __str__(self):
+        return self.name
 
 
 # Department model
@@ -230,6 +237,9 @@ class Department(SoftDeleteModel):
         if not self.is_deleted:            
             Employee.objects.filter(department=self).update(is_deleted=False)
 
+    def __str__(self):
+        return self.name
+    
 
 # Designation model
 class Designation(SoftDeleteModel):
@@ -264,6 +274,9 @@ class Designation(SoftDeleteModel):
         if not self.is_deleted:            
             Employee.objects.filter(designation=self).update(is_deleted=False)
 
+    def __str__(self):
+        return self.title
+
 
 # SocialStatus model
 class SocialStatus(SoftDeleteModel):
@@ -287,6 +300,9 @@ class SocialStatus(SoftDeleteModel):
 
     def save(self, *args, **kwargs):       
         super(SocialStatus, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 
 # DocumentType model
@@ -319,6 +335,9 @@ class DocumentType(SoftDeleteModel):
 
         if not self.is_deleted:
             Document.objects.filter(document_type=self).update(is_deleted=False)
+
+    def __str__(self):
+        return self.type
 
 
 # Document model
@@ -367,6 +386,9 @@ class Document(SoftDeleteModel):
             # Additional logic if needed when document is undeleted
             pass
 
+    def __str__(self):
+        return self.name
+
 
 # BranchType model
 class BranchType(SoftDeleteModel):
@@ -392,6 +414,9 @@ class BranchType(SoftDeleteModel):
     def save(self, *args, **kwargs):       
         super(BranchType, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.type
+
 
 # Packages model
 class Package(SoftDeleteModel):
@@ -416,6 +441,9 @@ class Package(SoftDeleteModel):
     def save(self, *args, **kwargs):     
         super(Package, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 # Contents model
 class Content(SoftDeleteModel):
@@ -439,6 +467,9 @@ class Content(SoftDeleteModel):
 
     def save(self, *args, **kwargs):       
         super(Content, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.content
 
 
 # PackageContents model
@@ -490,6 +521,9 @@ class ServiceCategory(SoftDeleteModel):
     def save(self, *args, **kwargs):       
         super(ServiceCategory, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.category
+
 
 # CourseCategories model
 class CourseCategory(SoftDeleteModel):
@@ -519,7 +553,10 @@ class CourseCategory(SoftDeleteModel):
             CourseSubCategory.objects.filter(course_category=self).update(is_active=False)            
 
         if not self.is_deleted:            
-            CourseSubCategory.objects.filter(course_category=self).update(is_deleted=False)            
+            CourseSubCategory.objects.filter(course_category=self).update(is_deleted=False)    
+
+    def __str__(self):
+        return self.category        
 
 
 # CourseSubCategories model
@@ -547,6 +584,9 @@ class CourseSubCategory(SoftDeleteModel):
     def save(self, *args, **kwargs):        
         super(CourseSubCategory, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.sub_category
+
 
 # FAQCategories model
 class FAQCategory(SoftDeleteModel):
@@ -570,3 +610,6 @@ class FAQCategory(SoftDeleteModel):
 
     def save(self, *args, **kwargs):
         super(FAQCategory, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.category

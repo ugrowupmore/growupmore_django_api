@@ -130,3 +130,6 @@ class Employee(SoftDeleteModel):
         if not self.is_deleted:
             # Implement further actions as needed
             pass
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
