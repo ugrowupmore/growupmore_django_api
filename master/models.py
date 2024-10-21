@@ -28,9 +28,6 @@ class Country(SoftDeleteModel):
     founded_date = models.DateField(null=True, blank=True)
     website = models.TextField(default='NA')   
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         db_table = '"master"."countries"'
         indexes = [
@@ -59,9 +56,10 @@ class Country(SoftDeleteModel):
         if not self.is_deleted:            
             State.objects.filter(country=self).update(is_deleted=False)
             City.objects.filter(country=self).update(is_deleted=False)   
-            Employee.objects.filter(country=self).update(is_deleted=False)   
+            Employee.objects.filter(country=self).update(is_deleted=False)      
 
-    
+    def __str__(self):
+        return self.name
 
 # State model
 class State(SoftDeleteModel):
