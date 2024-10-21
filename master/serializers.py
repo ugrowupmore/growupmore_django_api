@@ -14,8 +14,7 @@ class CountrySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class StateSerializer(serializers.ModelSerializer):
-    slug_source_field = ['country__iso3', 'name']
+class StateSerializer(serializers.ModelSerializer):    
     country_name = serializers.CharField(source='country.name', read_only=True)
     slug = serializers.CharField(read_only=True)
     create_date = serializers.DateTimeField(read_only=True)
