@@ -56,8 +56,10 @@ class Country(SoftDeleteModel):
         if not self.is_deleted:            
             State.objects.filter(country=self).update(is_deleted=False)
             City.objects.filter(country=self).update(is_deleted=False)   
-            Employee.objects.filter(country=self).update(is_deleted=False)                 
+            Employee.objects.filter(country=self).update(is_deleted=False)      
 
+    def __str__(self):
+            return self.iso3
 
 # State model
 class State(SoftDeleteModel):
@@ -106,6 +108,9 @@ class State(SoftDeleteModel):
         if not self.is_deleted:
             City.objects.filter(state=self).update(is_deleted=False)
             Employee.objects.filter(state=self).update(is_deleted=False)
+
+    def __str__(self):
+            return self.name
 
 
 # City model
