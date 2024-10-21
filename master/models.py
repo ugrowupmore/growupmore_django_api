@@ -59,7 +59,7 @@ class Country(SoftDeleteModel):
             Employee.objects.filter(country=self).update(is_deleted=False)      
 
     def __str__(self):
-            return self.iso3
+        return self.iso3
 
 # State model
 class State(SoftDeleteModel):
@@ -110,7 +110,7 @@ class State(SoftDeleteModel):
             Employee.objects.filter(state=self).update(is_deleted=False)
 
     def __str__(self):
-            return self.name
+        return self.name
 
 
 # City model
