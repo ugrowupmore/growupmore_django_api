@@ -58,13 +58,13 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Or specify allowed origins
-CORS_ALLOW_ALL_ORIGINS = True      # for development
+# CORS_ALLOW_ALL_ORIGINS = True      # for development
 
 # for production
-# CORS_ALLOWED_ORIGINS = [
-#     'http://127.0.0.1:8000',
-#     'http://localhost:8000',
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
 
 ROOT_URLCONF = 'GrowUpMore.urls'
 
